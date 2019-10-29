@@ -1,0 +1,18 @@
+version: '2'
+services:
+  jenkins:
+    restart: always
+    image: zuorn/jenkins
+    container_name: jenkins
+    expose:
+      - "8080"
+      - "50000"
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    environment:
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      # 将宿主机的 Docker 程序挂载到 Jenkins 容器内部
+      - /usr/bin/docker:/usr/bin/docker:ro
+      - ../data/jenkins:/var/jenkins_home
